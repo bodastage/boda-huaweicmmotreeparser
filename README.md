@@ -25,11 +25,29 @@ Below is the expected format of the input file:
 # Usage
 java -jar  huaweicmmotreeparser.jar data.xml outputDirectory
 
+```
+usage: java -jar boda-huaweicmmotreeparser.jar
+Parses Huawei MO Tree CM XML data to csv
+
+ -c,--parameter-config <PARAMETER_CONFIG>   parameter configuration file
+ -h,--help                                  show help
+ -i,--input-file <INPUT_FILE>               input file or directory name
+ -o,--output-directory <OUTPUT_DIRECTORY>   output directory name
+ -p,--extract-parameters                    extract only the managed
+                                            objects and parameters
+ -v,--version                               display version
+
+Examples:
+java -jar boda-huaweicmmotreeparser.jar -i dump_file -o out_folder
+java -jar boda-huaweicmmotreeparser.jar -i input_folder -o out_folder
+java -jar boda-huaweicmmotreeparser.jar -i input_folder -p
+java -jar boda-huaweicmmotreeparser.jar -i input_folder -p -m
+```
 # Download and installation
 The lastest compiled jar file is availabled in the dist directory. Alternatively, download it directly from [here](https://github.com/bodastage/boda-huaweicmmotreeparser/raw/master/dist/boda-huaweicmmotreeparser.jar).
 
 # Requirements
-To run the jar file, you need Java version 1.6 and above.
+To run the jar file, you need Java version 1.8 and above.
 
 # Getting help
 To report issues with the application or request new features use the issue [tracker](https://github.com/bodastage/boda-huaweicmmotreeparser/issues). For help and customizations send an email to info@bodastage.com.
