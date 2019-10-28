@@ -51,7 +51,7 @@ public class HuaweiCMMOTreeParser {
      * 
      * Since 1.3.0
      */
-    final static String VERSION = "2.0.0";
+    final static String VERSION = "2.0.1";
     
     /**
      * Tracks Managed Object attributes to write to file. This is dictated by 
@@ -419,6 +419,7 @@ public class HuaweiCMMOTreeParser {
             if( classDepth == 1 && moAttrName.equals("name")){
                 this.nodeName = tagData;
             }
+            
             tagData = "";
             return;
         }
@@ -431,8 +432,10 @@ public class HuaweiCMMOTreeParser {
                 if(!moColumns.containsKey(className)){
                     moColumns.put(className,new Stack());
                 }
-                
                 columns = moColumns.get(className);
+
+                moiParameterValueMap = classNameAttrsMap.get(className);
+                
                 Iterator<Map.Entry<String, String>> iter 
                             = moiParameterValueMap.entrySet().iterator();
                 while (iter.hasNext()) {
@@ -441,11 +444,14 @@ public class HuaweiCMMOTreeParser {
                         columns.push(me.getKey());
                     }       
                 }
+                
+                moColumns.put(className, columns);
+
             }
             
             if( parserState == ParserStates.EXTRACTING_VALUES){
                 String paramNames = "FILENAME,NODENAME";
-                String paramValues = baseFileName+","+toCSVFormat(this.nodeName);
+                String paramValues = baseFileName + "," + toCSVFormat(this.nodeName);
                 
                 //If MO is not in parameterFile, continue
                 if(!moColumns.containsKey(className) && parameterFile != null){
@@ -576,7 +582,7 @@ public class HuaweiCMMOTreeParser {
 
             parserState = ParserStates.EXTRACTING_VALUES;
         }
-
+                
         //Reset variables
         resetVariables();
         
